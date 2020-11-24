@@ -1,0 +1,16 @@
+div.col-4{
+    height: 650px;
+    overflow: auto;
+}
+
+.alignRight {
+    text-align: right;
+}
+.alignLeft {
+    text-align: left;
+}
+
+button#addBtn{
+    margin: auto;
+    margin-top: 1em;
+}

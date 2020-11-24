@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!--    Author: Hieu Dang
+            Purpose: Design a webpage to calculate the total of a shopping cart
+            Resource: Vue.js, Bootstrap -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Axios database -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- Vue CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    <title>Movie Tickets</title>
+    
+</head>
+<body>
+    <div class="container" id="app">
+      <!-- Create nav element-->
+      <!-- <mynav></mynav> -->
+      <!-- Create a list of cards component, max 3 objects in a row -->
+      <div class="row">
+        <div class="col-4" v-for="movie in showmovies">
+          <moviecard :title="movie.title" :content="movie.overview" :imgsrc="'https://image.tmdb.org/t/p/w500' + movie.poster_path"></moviecard>
+        </div>    
+      </div>
+      
+      <!-- My Summary table -->
+      <div class="row" v-show="checkshoworder">
+        <p>Order Summary:</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Movie</th>
+                    <th scope="col">Adult Tickets</th>
+                    <th scope="col">Children's Ticket</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">Button</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="ordermovie in ordermovies">
+                    <td>{{ordermovie.movieid}}</td>
+                    <td>{{ordermovie.movietit}}</td>
+                    <td>{{ordermovie.adultquan}}</td>
+                    <td>{{ordermovie.childquan}}</td>
+                    <td>{{ordermovie.subtotal}}</td>
+                    <td><button type='button' class='btn btn-primary' @click='removeitem(event)' id='remBtn' :value="ordermovie.movieid">Remove</button></td>
+                    
+                </tr >
+                    
+                <tr>
+                    <td colspan=4 class="alignRight">Total</td>
+                    <td colspan=2 class="alignLeft">{{caltotal}}</td>
+                </tr>
+            </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    
+
+    <!-- JS for popover: used for moviecard component content -->
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <!-- custom script -->
+    <script src="script.js"></script>
+</body>
+</html>
